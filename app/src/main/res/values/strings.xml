@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">League School</string>
+
+    <string-array name="server">
+        <item>EU Nordic and East</item>
+        <item>North America</item>
+        <item>Europe West</item>
+        <item>Latin America North</item>
+        <item>Latin America South</item>
+        <item>Brazil</item>
+        <item>Turkey</item>
+        <item>Russia</item>
+        <item>Oceania</item>
+        <item>Japan</item>
+        <item>Korea</item>
+    </string-array>
+
+    <string name="iconDescription">Summoner\'s Icon</string>
+    <string name="sumName">Summoner\'s name</string>
+    <string name="sumLevel">Level</string>
+    <string name="showProfile">Show Profile</string>
+    <string name="matchHistory">Match History</string>
+</resources>
