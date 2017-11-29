@@ -21,11 +21,11 @@ public class main extends Activity {
         setContentView(R.layout.activity_main);
 
         //must be set final cause accessed of within inner class
-        final EditText txtSumName = (EditText) findViewById(R.id.txtSumName);
-        final Spinner spinnerServer = (Spinner) findViewById(R.id.spinnerServer);
+        final EditText txtSumName = findViewById(R.id.txtSumName);
+        final Spinner spinnerServer = findViewById(R.id.spinnerServer);
 
         //Button brings up profile
-        Button btnSumProfile = (Button)findViewById(R.id.btnSumProfile);
+        Button btnSumProfile = findViewById(R.id.btnSumProfile);
         btnSumProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,8 +33,8 @@ public class main extends Activity {
                 Intent intentSumProfile = new Intent(main.this, summonerProfile.class);
                 //create bundle
                 Bundle bundle = new Bundle();
-                //get name and server from fields
-                String sumName = txtSumName.getText().toString();
+                //get name from field
+                String summonerName = txtSumName.getText().toString();
                 //get server id from spinner selection
                 String server = "";
                 switch (spinnerServer.getSelectedItem().toString()) {
@@ -62,8 +62,8 @@ public class main extends Activity {
                         break;
                 }
                 //place them into the bundle
-                bundle.putString("sumName", sumName);
-                bundle.putString("server", server);
+                bundle.putString("keySumName", summonerName);
+                bundle.putString("keyServer", server);
                 //place the bundle in the intent
                 intentSumProfile.putExtras(bundle);
                 //start the activity

@@ -40,7 +40,7 @@ public class jsonTasks extends AsyncTask<String, String, String> {
             reader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder buffer = new StringBuilder();
 
-            String line;// = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 buffer.append(line);
             }

@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".summonerProfile" />
-        <activity android:name=".matchHistory"></activity>
+        <activity android:name=".matchHistory" />
     </application>
 
 </manifest>
