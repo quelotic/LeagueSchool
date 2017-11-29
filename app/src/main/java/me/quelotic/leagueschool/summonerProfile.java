@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,6 +41,9 @@ public class summonerProfile extends Activity {
         final String summonerName = bundle.getString("keySumName");
         final String server = bundle.getString("keyServer");
 
+
+        // ############################## FIRST JSON TASK ####################################
+
         //create the json task with the data process override for the first level of data fetching
         jsonTasks asyncTask = new jsonTasks(new jsonTasks.AsyncResponse() {
 
@@ -63,8 +67,42 @@ public class summonerProfile extends Activity {
                 }
             }
         });
-        //execute the first level asyncTask
+        //execute the first asyncTask
         asyncTask.execute("https://" + server + ".api.riotgames.com/lol/summoner/v3/summoners/by-name/" + summonerName + "?api_key=" + apiKey);
+
+
+
+        // ########################### SECOND JSON TASK ####################################
+
+        //create the json task with the data process override for the first level of data fetching
+        jsonTasks asyncTask2 = new jsonTasks(new jsonTasks.AsyncResponse() {
+
+            @Override
+            public void processFinish(String output) {
+                JSONObject sumPosObj, one, two;
+                JSONArray sumPosArray;
+                try {
+                    //create json objects from the output
+                    sumPosObj = new JSONObject(output);
+                    sumPosArray = sumPosObj.getJSONArray("");
+                    one = sumPosArray.getJSONObject(0);
+                    two = sumPosArray.getJSONObject(1);
+
+
+
+
+                    //set the text and image fields
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        //execute the second asyncTask
+        asyncTask2.execute("https://\" + server + \".api.riotgames.com/lol/league/v3/positions/by-summoner/" + summonerID + "?api_key=" + apiKey);
+
 
         //button brings up match history
         Button btnMatchHistory = findViewById(R.id.btnMatchHistory);
