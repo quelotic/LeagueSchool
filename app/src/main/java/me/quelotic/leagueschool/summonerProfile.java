@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class summonerProfile extends Activity {
@@ -25,7 +26,9 @@ public class summonerProfile extends Activity {
     private TextView txtSumName;
     private TextView txtSumLevel;
     private ImageView imgSumIcon;
-    private TextView testText, testText2;
+    private TextView txtFiveSoloLeagueName, txtFlexLeagueName;
+    private TextView txtFiveSoloRank, txtFlexRank;
+    private TextView txtFiveSoloWins, txtFiveSoloLosses, txtFlexWins, txtFlexLosses;
     String summonerID, accountID;
 
     @Override
@@ -40,8 +43,11 @@ public class summonerProfile extends Activity {
         txtSumName = findViewById(R.id.sumName);
         txtSumLevel = findViewById(R.id.sumLevel);
         imgSumIcon = findViewById(R.id.sumIcon);
-        testText = findViewById(R.id.textView);
-        testText2 = findViewById(R.id.textView2);
+
+        txtFiveSoloLeagueName = findViewById(R.id.fiveSoloLeagueName);
+        txtFlexLeagueName = findViewById(R.id.flexLeagueName);
+        txtFiveSoloRank = findViewById(R.id.fiveSoloRank);
+        txtFlexRank = findViewById(R.id.flexRank);
 
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -64,7 +70,7 @@ public class summonerProfile extends Activity {
                         sumInfo = new JSONObject(output);
                         //set the text and image fields
                         txtSumName.setText(sumInfo.getString("name"));
-                        txtSumLevel.setText(Integer.toString(sumInfo.getInt("summonerLevel")));
+                        txtSumLevel.setText(String.format(Locale.US,"%d", sumInfo.getInt("summonerLevel")));
                         Picasso.with(getBaseContext()).load("https://ddragon.leagueoflegends.com/cdn/7.23.1/img/profileicon/" + Integer.toString(sumInfo.getInt("profileIconId")) + ".png").into(imgSumIcon);
                         //set the variables to use later
                         summonerID = Integer.toString(sumInfo.getInt("id"));
@@ -97,20 +103,21 @@ public class summonerProfile extends Activity {
                                     for (int i = 0; i < sumPosArray.length(); i++) {
                                         JSONObject c = sumPosArray.getJSONObject(i);
                                         if (Objects.equals(c.getString("queueType"), "RANKED_SOLO_5x5")){
-                                            testText.setText(c.getString("leagueName"));
+                                            txtFiveSoloLeagueName.setText(c.getString("leagueName"));
+                                            txtFiveSoloRank.setText(c.getString("tier"));
+                                            txtFiveSoloRank.append(" ");
+                                            txtFiveSoloRank.append(c.getString("rank"));
+                                            //txtFiveSoloWins.setText(String.format(Locale.US,"%d", c.getInt("wins")));
+                                            //txtFiveSoloLosses.setText(Integer.toString(c.getInt("losses")));
                                         } else if (Objects.equals(c.getString("queueType"), "RANKED_FLEX_TT")){
-                                            testText2.setText(c.getString("leagueName"));
+                                            txtFlexLeagueName.setText(c.getString("leagueName"));
+                                            txtFlexRank.setText(c.getString("tier"));
+                                            txtFlexRank.append(" ");
+                                            txtFlexRank.append(c.getString("rank"));
+                                            //txtFlexWins.setText(Integer.toString(c.getInt("wins")));
+                                            //txtFlexLosses.setText(Integer.toString(c.getInt("losses")));
                                         }
-                                        String leagueName = c.getString("leagueName");
-                                        String tier = c.getString("tier");
-                                        String queueType = c.getString("queueType");
-                                        String rank = c.getString("rank");
-//                            String leaguePoints = c.getInt(leaguePoints);
-//                            String rank = c.getString("rank");
-//                            String rank = c.getString("rank");
                                     }
-                                    //set the text and image fields
-
                                 } catch (final JSONException e) {
                                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                                     runOnUiThread(new Runnable() {

@@ -16,8 +16,12 @@
     </string-array>
 
     <string name="iconDescription">Summoner\'s Icon</string>
-    <string name="sumName">Summoner\'s name</string>
-    <string name="sumLevel">Level</string>
+    <string name="sumName">Summoner\'s Name</string>
     <string name="showProfile">Show Profile</string>
     <string name="matchHistory">Match History</string>
+    <string name="backgroundDescription">Background</string>
+    <string name="logoDescription">League of Legends</string>
+
+    <string name="rankedSoloTitle">Ranked Solo 5v5</string>
+    <string name="rankedFlexTitle">Ranked Flex</string>
 </resources>

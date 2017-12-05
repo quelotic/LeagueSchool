@@ -1,58 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="me.quelotic.leagueschool.main">
-
-<FrameLayout
-    android:id="@+id/frameLayout"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="me.quelotic.leagueschool.main">
 
     <ImageView
         android:id="@+id/background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/bgsnow" />
+        android:src="@drawable/bgsnow"
+        android:contentDescription="@string/backgroundDescription"/>
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logoDescription"/>
 
-<EditText
-    android:id="@+id/txtSumName"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="100dp"
-    android:layout_marginBottom="10dp"
-    android:ems="10"
-    android:hint="@string/sumName"
-    android:inputType="textPersonName"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:textSize="25sp"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo">
 
-<Spinner
-    android:id="@+id/spinnerServer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:entries="@array/server"
-    app:layout_constraintEnd_toEndOf="@+id/txtSumName"
-    app:layout_constraintStart_toStartOf="@+id/txtSumName"
-    app:layout_constraintTop_toBottomOf="@+id/txtSumName"
-    android:spinnerMode="dialog" />
+        <EditText
+            android:id="@+id/txtSumName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/advent_pro_thin"
+            android:hint="@string/sumName"
+            android:inputType="textPersonName"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<Button
-    android:id="@+id/btnSumProfile"
-    android:layout_width="175dp"
-    android:layout_height="60dp"
-    android:layout_marginTop="16dp"
-    android:text="@string/showProfile"
-    app:layout_constraintEnd_toEndOf="@+id/spinnerServer"
-    app:layout_constraintStart_toStartOf="@+id/spinnerServer"
-    app:layout_constraintTop_toBottomOf="@+id/spinnerServer" />
+        <Spinner
+            android:id="@+id/spinnerServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:entries="@array/server"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="@+id/txtSumName"
+            app:layout_constraintStart_toStartOf="@+id/txtSumName"
+            app:layout_constraintTop_toBottomOf="@+id/txtSumName" />
+
+        <Button
+            android:id="@+id/btnSumProfile"
+            android:layout_width="175dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/showProfile"
+            app:layout_constraintEnd_toEndOf="@+id/spinnerServer"
+            app:layout_constraintStart_toStartOf="@+id/spinnerServer"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerServer" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
