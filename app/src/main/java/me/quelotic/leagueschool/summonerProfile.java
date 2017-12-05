@@ -36,7 +36,7 @@ public class summonerProfile extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_summoner_profile);
 
-        String apiKey = "RGAPI-b7910bbe-3d36-4414-8c4a-40a5b13dd535";
+        final String apiKey = "RGAPI-7c239c00-ccb4-49e3-8f6e-6b6f9b3c99df";
         txtSumName = findViewById(R.id.sumName);
         txtSumLevel = findViewById(R.id.sumLevel);
         imgSumIcon = findViewById(R.id.sumIcon);
@@ -52,7 +52,7 @@ public class summonerProfile extends Activity {
         // ############################## FIRST JSON TASK ####################################
 
         //create the json task with the data process override for the first level of data fetching
-        jsonTasks asyncTask = new jsonTasks(new jsonTasks.AsyncResponse() {
+        final jsonTasks asyncTask = new jsonTasks(new jsonTasks.AsyncResponse() {
 
             @Override
             public void processFinish(String output) {
@@ -81,68 +81,58 @@ public class summonerProfile extends Activity {
                             }
                         });
                     }
+
+                    // ########################### SECOND JSON TASK ####################################
+
+                    //create the json task with the data process override for the first level of data fetching
+                    jsonTasks asyncTask2 = new jsonTasks(new jsonTasks.AsyncResponse() {
+
+                        @Override
+                        public void processFinish(String output) {
+                            String TAG = summonerProfile.class.getSimpleName();
+                            if (output != null) {
+                                try {
+                                    //create json objects from the output
+                                    JSONArray sumPosArray = new JSONArray(output);
+                                    for (int i = 0; i < sumPosArray.length(); i++) {
+                                        JSONObject c = sumPosArray.getJSONObject(i);
+                                        if (Objects.equals(c.getString("queueType"), "RANKED_SOLO_5x5")){
+                                            testText.setText(c.getString("leagueName"));
+                                        } else if (Objects.equals(c.getString("queueType"), "RANKED_FLEX_TT")){
+                                            testText2.setText(c.getString("leagueName"));
+                                        }
+                                        String leagueName = c.getString("leagueName");
+                                        String tier = c.getString("tier");
+                                        String queueType = c.getString("queueType");
+                                        String rank = c.getString("rank");
+//                            String leaguePoints = c.getInt(leaguePoints);
+//                            String rank = c.getString("rank");
+//                            String rank = c.getString("rank");
+                                    }
+                                    //set the text and image fields
+
+                                } catch (final JSONException e) {
+                                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Json parsing error: " + e.getMessage(),
+                                                    Toast.LENGTH_LONG)
+                                                    .show();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                    //execute the second asyncTask
+                    asyncTask2.execute("https://" + server + ".api.riotgames.com/lol/league/v3/positions/by-summoner/" + summonerID + "?api_key=" + apiKey);
                 }
             }
         });
         //execute the first asyncTask
         asyncTask.execute("https://" + server + ".api.riotgames.com/lol/summoner/v3/summoners/by-name/" + summonerName + "?api_key=" + apiKey);
-
-
-
-        // ########################### SECOND JSON TASK ####################################
-
-        //create the json task with the data process override for the first level of data fetching
-        jsonTasks asyncTask2 = new jsonTasks(new jsonTasks.AsyncResponse() {
-
-            @Override
-            public void processFinish(String output) {
-                String TAG = summonerProfile.class.getSimpleName();
-                if (output != null) {
-                    try {
-                        //create json objects from the output
-                        JSONArray sumPosArray = new JSONArray(output);
-                        for (int i = 0; i < sumPosArray.length(); i++) {
-                            JSONObject c = sumPosArray.getJSONObject(i);
-                            if (Objects.equals(c.getString("queueType"), "RANKED_SOLO_5x5")){
-                                testText.setText(c.getString("leagueName"));
-                            } else if (Objects.equals(c.getString("queueType"), "RANKED_FLEX_TT")){
-                                testText2.setText(c.getString("leagueName"));
-                            }
-                            String leagueName = c.getString("leagueName");
-                            String tier = c.getString("tier");
-                            String queueType = c.getString("queueType");
-                            String rank = c.getString("rank");
-//                            String leaguePoints = c.getInt(leaguePoints);
-//                            String rank = c.getString("rank");
-//                            String rank = c.getString("rank");
-
-
-
-                        }
-
-
-                        //set the text and image fields
-
-                    } catch (final JSONException e) {
-                        Log.e(TAG, "Json parsing error: " + e.getMessage());
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(),
-                                        "Json parsing error: " + e.getMessage(),
-                                        Toast.LENGTH_LONG)
-                                        .show();
-                            }
-                        });
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        //execute the second asyncTask
-        asyncTask2.execute("https://" + server + ".api.riotgames.com/lol/league/v3/positions/by-summoner/" + summonerID + "?api_key=" + apiKey);
-
 
         //button brings up match history
         Button btnMatchHistory = findViewById(R.id.btnMatchHistory);

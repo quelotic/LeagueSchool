@@ -48,22 +48,22 @@ public class matchHistory extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_match_history);
 
-        lvMatchHist = (ListView) findViewById(R.id.matchHistoryListView);
+        lvMatchHist = findViewById(R.id.matchHistoryListView);
 
         Bundle bundle = getIntent().getExtras();
-        String sumID = bundle.getString("sumID");
-        String accID = bundle.getString("accID");
-        String server = bundle.getString("server");
+        //String sumID = bundle.getString("keySumID");
+        //String accID = bundle.getString("keyAccID");
+        String server = bundle.getString("keyServer");
 
-        new JSONTask().execute(sumID, accID, server);
+        new JSONTask().execute(server);
 
     }
     public class JSONTask extends AsyncTask<String, String, List<matchHistoryModel>> {
 
         @Override
         protected List<matchHistoryModel> doInBackground(String... params) {
-            String matchlists = "https://" + params[2] + ".api.riotgames.com/lol/match/v3/matchlists/by-account/" + params[1] + "/recent?api_key=RGAPI-5f588f65-8e43-4503-8bdc-a29de1561ff6";
-            String matchinfo = "https://" + params[2] + ".api.riotgames.com/lol/match/v3/matchlists/by-account/" + params[0] + "/recent?api_key=RGAPI-5f588f65-8e43-4503-8bdc-a29de1561ff6";
+            String matchlists = "https://" + params[0] + ".api.riotgames.com/lol/match/v3/matchlists/by-account/35914387/recent?api_key=RGAPI-5f588f65-8e43-4503-8bdc-a29de1561ff6";
+            //String matchinfo = "https://" + params[2] + ".api.riotgames.com/lol/match/v3/matchlists/by-account/" + params[0] + "/recent?api_key=RGAPI-5f588f65-8e43-4503-8bdc-a29de1561ff6";
             HttpsURLConnection connection = null;
             BufferedReader reader = null;
 
@@ -73,8 +73,8 @@ public class matchHistory extends Activity {
                 connection.connect();
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
+                StringBuilder buffer = new StringBuilder();
+                String line;
                 while ((line = reader.readLine()) != null){
                     buffer.append(line);
                 }
@@ -262,8 +262,8 @@ public class matchHistory extends Activity {
                 convertView = inflater.inflate(resource, null);
             }
 
-            championIcon = (ImageView) convertView.findViewById(R.id.championIcon);
-            championName = (TextView) convertView.findViewById(R.id.championName);
+            championIcon = convertView.findViewById(R.id.championIcon);
+            championName = convertView.findViewById(R.id.championName);
             strChampionName = getChampionName(matchHistoryModelList.get(position).getChampion());
 
             Picasso.with(getBaseContext()).load("https://ddragon.leagueoflegends.com/cdn/7.23.1/img/champion/" + strChampionName + ".png").into(championIcon);
