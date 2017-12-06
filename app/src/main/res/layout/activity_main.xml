@@ -45,14 +45,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/advent_pro_thin"
+            android:fontFamily="@font/advent_pro"
             android:hint="@string/sumName"
             android:inputType="textPersonName"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:letterSpacing="0.05"/>
 
         <Spinner
             android:id="@+id/spinnerServer"
@@ -60,7 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:entries="@array/server"
-            android:spinnerMode="dialog"
             app:layout_constraintEnd_toEndOf="@+id/txtSumName"
             app:layout_constraintStart_toStartOf="@+id/txtSumName"
             app:layout_constraintTop_toBottomOf="@+id/txtSumName" />
