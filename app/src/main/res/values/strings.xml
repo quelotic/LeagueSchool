@@ -22,6 +22,11 @@
     <string name="backgroundDescription">Background</string>
     <string name="logoDescription">League of Legends</string>
 
-    <string name="rankedSoloTitle">Ranked Solo 5v5</string>
-    <string name="rankedFlexTitle">Ranked Flex</string>
+    <string name="rankedSoloTitle">Solo 5v5</string>
+    <string name="rankedFlexTTTitle">Flex 3v3</string>
+    <string name="rankedFlexSRTitle">Flex 5v5</string>
+
+    <string name="hotStreak">Hot Streak</string>
+    <string name="freshBlood">Fresh Blood</string>
+    <string name="veteran">Veteran</string>
 </resources>

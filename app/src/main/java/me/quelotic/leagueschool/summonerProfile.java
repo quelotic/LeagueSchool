@@ -26,9 +26,12 @@ public class summonerProfile extends Activity {
     private TextView txtSumName;
     private TextView txtSumLevel;
     private ImageView imgSumIcon;
-    private TextView txtFiveSoloLeagueName, txtFlexLeagueName;
-    private TextView txtFiveSoloRank, txtFlexRank;
-    private TextView txtFiveSoloWins, txtFiveSoloLosses, txtFlexWins, txtFlexLosses;
+    private TextView txtFiveSoloLeagueName, txtFiveSoloRank, txtFiveSoloWins, txtFiveSoloLosses, txtFiveSoloLP;
+    private TextView txtFlex3LeagueName, txtFlex3Rank, txtFlex3Wins, txtFlex3Losses, txtFlex3LP;
+    private TextView txtFlex5LeagueName, txtFlex5Rank, txtFlex5Wins, txtFlex5Losses, txtFlex5LP;
+    private ImageView imgFiveSoloHS, imgFiveSoloFB, imgFiveSoloVET;
+    private ImageView imgFlex3HS, imgFlex3FB, imgFlex3VET;
+    private ImageView imgFlex5HS, imgFlex5FB, imgFlex5VET;
     String summonerID, accountID;
 
     @Override
@@ -39,15 +42,37 @@ public class summonerProfile extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_summoner_profile);
 
-        final String apiKey = "RGAPI-7c239c00-ccb4-49e3-8f6e-6b6f9b3c99df";
+        final String apiKey = "RGAPI-408b0669-43e6-43c8-86ec-c773cd858586";
         txtSumName = findViewById(R.id.sumName);
         txtSumLevel = findViewById(R.id.sumLevel);
         imgSumIcon = findViewById(R.id.sumIcon);
 
         txtFiveSoloLeagueName = findViewById(R.id.fiveSoloLeagueName);
-        txtFlexLeagueName = findViewById(R.id.flexLeagueName);
         txtFiveSoloRank = findViewById(R.id.fiveSoloRank);
-        txtFlexRank = findViewById(R.id.flexRank);
+        txtFiveSoloWins = findViewById(R.id.fiveSoloWins);
+        txtFiveSoloLosses = findViewById(R.id.fiveSoloLosses);
+        txtFiveSoloLP = findViewById(R.id.fiveSoloLP);
+        imgFiveSoloHS = findViewById(R.id.fiveSoloHS);
+        imgFiveSoloFB = findViewById(R.id.fiveSoloFB);
+        imgFiveSoloVET = findViewById(R.id.fiveSoloVET);
+
+        txtFlex3LeagueName = findViewById(R.id.flex3LeagueName);
+        txtFlex3Rank = findViewById(R.id.flex3Rank);
+        txtFlex3Wins = findViewById(R.id.flex3Wins);
+        txtFlex3Losses = findViewById(R.id.flex3Losses);
+        txtFlex3LP = findViewById(R.id.flex3LP);
+        imgFlex3HS = findViewById(R.id.flex3HS);
+        imgFlex3FB = findViewById(R.id.flex3FB);
+        imgFlex3VET = findViewById(R.id.flex3VET);
+
+        txtFlex5LeagueName = findViewById(R.id.flex5LeagueName);
+        txtFlex5Rank = findViewById(R.id.flex5Rank);
+        txtFlex5Wins = findViewById(R.id.flex5Wins);
+        txtFlex5Losses = findViewById(R.id.flex5Losses);
+        txtFlex5LP = findViewById(R.id.flex5LP);
+        imgFlex5HS = findViewById(R.id.flex5HS);
+        imgFlex5FB = findViewById(R.id.flex5FB);
+        imgFlex5VET = findViewById(R.id.flex5VET);
 
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -107,15 +132,52 @@ public class summonerProfile extends Activity {
                                             txtFiveSoloRank.setText(c.getString("tier"));
                                             txtFiveSoloRank.append(" ");
                                             txtFiveSoloRank.append(c.getString("rank"));
-                                            //txtFiveSoloWins.setText(String.format(Locale.US,"%d", c.getInt("wins")));
-                                            //txtFiveSoloLosses.setText(Integer.toString(c.getInt("losses")));
+                                            txtFiveSoloWins.setText(String.format(Locale.US,"%d", c.getInt("wins")));
+                                            txtFiveSoloWins.append("W");
+                                            txtFiveSoloLosses.setText(String.format(Locale.US,"%d", c.getInt("losses")));
+                                            txtFiveSoloLosses.append("L");
+                                            txtFiveSoloLP.setText(String.format(Locale.US,"%d", c.getInt("leaguePoints")));
+                                            txtFiveSoloLP.append("LP");
+                                            if (c.getBoolean("hotStreak")){ imgFiveSoloHS.setImageResource(R.drawable.thotstreak); }
+                                            else { imgFiveSoloHS.setImageResource(R.drawable.fhotstreak); }
+                                            if (c.getBoolean("freshBlood")){ imgFiveSoloFB.setImageResource(R.drawable.tfreshblood); }
+                                            else { imgFiveSoloFB.setImageResource(R.drawable.ffreshblood); }
+                                            if (c.getBoolean("veteran")){ imgFiveSoloVET.setImageResource(R.drawable.tveteran); }
+                                            else { imgFiveSoloVET.setImageResource(R.drawable.fveteran); }
                                         } else if (Objects.equals(c.getString("queueType"), "RANKED_FLEX_TT")){
-                                            txtFlexLeagueName.setText(c.getString("leagueName"));
-                                            txtFlexRank.setText(c.getString("tier"));
-                                            txtFlexRank.append(" ");
-                                            txtFlexRank.append(c.getString("rank"));
-                                            //txtFlexWins.setText(Integer.toString(c.getInt("wins")));
-                                            //txtFlexLosses.setText(Integer.toString(c.getInt("losses")));
+                                            txtFlex3LeagueName.setText(c.getString("leagueName"));
+                                            txtFlex3Rank.setText(c.getString("tier"));
+                                            txtFlex3Rank.append(" ");
+                                            txtFlex3Rank.append(c.getString("rank"));
+                                            txtFlex3Wins.setText(String.format(Locale.US,"%d", c.getInt("wins")));
+                                            txtFlex3Wins.append("W");
+                                            txtFlex3Losses.setText(String.format(Locale.US,"%d", c.getInt("losses")));
+                                            txtFlex3Losses.append("L");
+                                            txtFlex3LP.setText(String.format(Locale.US,"%d", c.getInt("leaguePoints")));
+                                            txtFlex3LP.append("LP");
+                                            if (c.getBoolean("hotStreak")){ imgFlex3HS.setImageResource(R.drawable.thotstreak); }
+                                            else { imgFlex3HS.setImageResource(R.drawable.fhotstreak); }
+                                            if (c.getBoolean("freshBlood")){ imgFlex3FB.setImageResource(R.drawable.tfreshblood); }
+                                            else { imgFlex3FB.setImageResource(R.drawable.ffreshblood); }
+                                            if (c.getBoolean("veteran")){ imgFlex3VET.setImageResource(R.drawable.tveteran); }
+                                            else { imgFlex3VET.setImageResource(R.drawable.fveteran); }
+                                        } else if (Objects.equals(c.getString("queueType"), "RANKED_FLEX_SR")){
+                                            txtFlex5LeagueName.setText(c.getString("leagueName"));
+                                            txtFlex5Rank.setText(c.getString("tier"));
+                                            txtFlex5Rank.append(" ");
+                                            txtFlex5Rank.append(c.getString("rank"));
+                                            txtFlex5Wins.setText(String.format(Locale.US,"%d", c.getInt("wins")));
+                                            txtFlex5Wins.append("W");
+                                            txtFlex5Losses.setText(String.format(Locale.US,"%d", c.getInt("losses")));
+                                            txtFlex5Losses.append("L");
+                                            txtFlex5LP.setText(String.format(Locale.US,"%d", c.getInt("leaguePoints")));
+                                            txtFlex5LP.append("LP");
+                                            if (c.getBoolean("hotStreak")){ imgFlex5HS.setImageResource(R.drawable.thotstreak); }
+                                            else { imgFlex5HS.setImageResource(R.drawable.fhotstreak); }
+                                            if (c.getBoolean("freshBlood")){ imgFlex5FB.setImageResource(R.drawable.tfreshblood); }
+                                            else { imgFlex5FB.setImageResource(R.drawable.ffreshblood); }
+                                            if (c.getBoolean("veteran")){ imgFlex5VET.setImageResource(R.drawable.tveteran); }
+                                            else { imgFlex5VET.setImageResource(R.drawable.fveteran); }
                                         }
                                     }
                                 } catch (final JSONException e) {

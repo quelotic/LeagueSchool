@@ -30,7 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/iconDescription"
-            android:src="@mipmap/ic_launcher"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +122,16 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
+                    android:id="@+id/fiveSoloLP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/fiveSoloWins"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -144,10 +153,40 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="30dp">
+
+                <ImageView
+                    android:id="@+id/fiveSoloHS"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/hotStreak"/>
+
+                <ImageView
+                    android:id="@+id/fiveSoloFB"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/freshBlood"/>
+
+                <ImageView
+                    android:id="@+id/fiveSoloVET"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/veteran"/>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/flexLayout"
+            android:id="@+id/flex3Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@id/fiveLayout"
@@ -156,17 +195,17 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/flexTitle"
+                android:id="@+id/flex3Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/advent_pro_thin"
-                android:text="@string/rankedFlexTitle"
+                android:text="@string/rankedFlexTTTitle"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/flexRank"
+                android:id="@+id/flex3Rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amita"
@@ -175,7 +214,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/flexLeagueName"
+                android:id="@+id/flex3LeagueName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
@@ -192,7 +231,17 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
-                    android:id="@+id/flexWins"
+                    android:id="@+id/flex3LP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/flex3Wins"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -203,7 +252,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/flexLosses"
+                    android:id="@+id/flex3Losses"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -213,6 +262,269 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="30dp">
+
+                <ImageView
+                    android:id="@+id/flex3HS"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/hotStreak"/>
+
+                <ImageView
+                    android:id="@+id/flex3FB"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/freshBlood"/>
+
+                <ImageView
+                    android:id="@+id/flex3VET"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/veteran"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rankedInfo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rankedInfo"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/weLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/rankedInfo"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/weTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/advent_pro_thin"
+                android:text="w/e Title"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/weRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amita"
+                android:includeFontPadding="false"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/weLeagueName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
+                android:layout_marginTop="-10dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/weLP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/weWins"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/weLosses"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="30dp">
+
+                <ImageView
+                    android:id="@+id/weHS"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/hotStreak"/>
+
+                <ImageView
+                    android:id="@+id/weFB"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/freshBlood"/>
+
+                <ImageView
+                    android:id="@+id/weVET"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/veteran"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/flex5Layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/fiveLayout"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/flex5Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/advent_pro_thin"
+                android:text="@string/rankedFlexSRTitle"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/flex5Rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amita"
+                android:includeFontPadding="false"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/flex5LeagueName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
+                android:layout_marginTop="-10dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/flex5LP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/flex5Wins"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/flex5Losses"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_thin"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="30dp">
+
+                <ImageView
+                    android:id="@+id/flex5HS"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/hotStreak"/>
+
+                <ImageView
+                    android:id="@+id/flex5FB"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/freshBlood"/>
+
+                <ImageView
+                    android:id="@+id/flex5VET"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/veteran"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
