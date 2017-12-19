@@ -42,7 +42,7 @@ public class summonerProfile extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_summoner_profile);
 
-        final String apiKey = "RGAPI-408b0669-43e6-43c8-86ec-c773cd858586";
+        final String apiKey = "RGAPI-fe3d452c-117d-48c5-8d15-1ffba1b4d9ca";
         txtSumName = findViewById(R.id.sumName);
         txtSumLevel = findViewById(R.id.sumLevel);
         imgSumIcon = findViewById(R.id.sumIcon);
@@ -96,7 +96,7 @@ public class summonerProfile extends Activity {
                         //set the text and image fields
                         txtSumName.setText(sumInfo.getString("name"));
                         txtSumLevel.setText(String.format(Locale.US,"%d", sumInfo.getInt("summonerLevel")));
-                        Picasso.with(getBaseContext()).load("https://ddragon.leagueoflegends.com/cdn/7.23.1/img/profileicon/" + Integer.toString(sumInfo.getInt("profileIconId")) + ".png").into(imgSumIcon);
+                        Picasso.with(getBaseContext()).load("https://ddragon.leagueoflegends.com/cdn/7.24.2/img/profileicon/" + Integer.toString(sumInfo.getInt("profileIconId")) + ".png").into(imgSumIcon);
                         //set the variables to use later
                         summonerID = Integer.toString(sumInfo.getInt("id"));
                         accountID = Integer.toString(sumInfo.getInt("accountId"));
@@ -214,8 +214,8 @@ public class summonerProfile extends Activity {
                 Bundle bundleMatchHist = new Bundle();
                 //place the strings into the bundle
                 bundleMatchHist.putString("keyServer", server);
-                bundleMatchHist.putString("keySumID", summonerID);
-                bundleMatchHist.putString("keyAccID", accountID);
+                bundleMatchHist.putString("keyApiKey", apiKey);
+                bundleMatchHist.putString("keySumName", summonerName);
                 //place the bundle in the intent
                 intentMatchHist.putExtras(bundleMatchHist);
                 //start the activity

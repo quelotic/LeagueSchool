@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -30,6 +32,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -37,8 +41,8 @@ import me.quelotic.leagueschool.models.matchHistoryModel;
 
 public class matchHistory extends Activity {
 
-    private TextView textView;
     private ListView lvMatchHist;
+    String summonerID, accountID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,81 +55,95 @@ public class matchHistory extends Activity {
         lvMatchHist = findViewById(R.id.matchHistoryListView);
 
         Bundle bundle = getIntent().getExtras();
-        //String sumID = bundle.getString("keySumID");
-        //String accID = bundle.getString("keyAccID");
-        String server = bundle.getString("keyServer");
+        final String server = bundle.getString("keyServer");
+        final String summonerName = bundle.getString("keySumName");
+        final String apiKey = bundle.getString("keyApiKey");
 
-        new JSONTask().execute(server);
+        // ############################## FIRST JSON TASK ####################################
 
-    }
-    public class JSONTask extends AsyncTask<String, String, List<matchHistoryModel>> {
+        //create the json task with the data process override for the first level of data fetching
+        final jsonTasks asyncTask = new jsonTasks(new jsonTasks.AsyncResponse() {
 
-        @Override
-        protected List<matchHistoryModel> doInBackground(String... params) {
-            String matchlists = "https://" + params[0] + ".api.riotgames.com/lol/match/v3/matchlists/by-account/35914387/recent?api_key=RGAPI-5f588f65-8e43-4503-8bdc-a29de1561ff6";
-            //String matchinfo = "https://" + params[2] + ".api.riotgames.com/lol/match/v3/matchlists/by-account/" + params[0] + "/recent?api_key=RGAPI-5f588f65-8e43-4503-8bdc-a29de1561ff6";
-            HttpsURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(matchlists);
-                connection = (HttpsURLConnection) url.openConnection();
-                connection.connect();
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-                StringBuilder buffer = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null){
-                    buffer.append(line);
-                }
-
-                String finalJSON = buffer.toString();
-                JSONObject parentObject = new JSONObject(finalJSON);
-                JSONArray parentArray = parentObject.getJSONArray("matches");
-
-                List<matchHistoryModel> matchHistModelList = new ArrayList<>();
-
-                for (int i=0; i<parentArray.length(); i++){
-                    JSONObject finalObject = parentArray.getJSONObject(i);
-                    matchHistoryModel matchHistModel = new matchHistoryModel();
-                    matchHistModel.setPlatformId(finalObject.getString("platformId"));
-                    matchHistModel.setGameId(finalObject.getInt("gameId"));
-                    matchHistModel.setChampion(finalObject.getInt("champion"));
-                    matchHistModel.setQueue(finalObject.getInt("queue"));
-                    matchHistModel.setSeason(finalObject.getInt("season"));
-                    matchHistModel.setRole(finalObject.getString("role"));
-                    matchHistModel.setLane(finalObject.getString("lane"));
-                    matchHistModelList.add(matchHistModel);
-                }
-                return matchHistModelList;
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null){
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
+            @Override
+            public void processFinish(String output) {
+                String TAG = summonerProfile.class.getSimpleName();
+                JSONObject sumInfo;
+                if (output != null) {
+                    try {
+                        //create json object from the output
+                        sumInfo = new JSONObject(output);
+                        //set the variables to use later
+                        summonerID = Integer.toString(sumInfo.getInt("id"));
+                        accountID = Integer.toString(sumInfo.getInt("accountId"));
+                    } catch (final JSONException e) {
+                        Log.e(TAG, "Json parsing error: " + e.getMessage());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        "Json parsing error: " + e.getMessage(),
+                                        Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                    // ########################### SECOND JSON TASK ####################################
+
+                    //create the json task with the data process override for the first level of data fetching
+                    jsonTasks asyncTask2 = new jsonTasks(new jsonTasks.AsyncResponse() {
+
+                        @Override
+                        public void processFinish(String output) {
+                            String TAG = summonerProfile.class.getSimpleName();
+                            if (output != null) {
+                                try {
+
+
+                                    JSONObject parentObject = new JSONObject(output);
+                                    JSONArray parentArray = parentObject.getJSONArray("matches");
+
+                                    List<matchHistoryModel> matchHistModelList = new ArrayList<>();
+
+                                    for (int i=0; i<parentArray.length(); i++){
+                                        JSONObject finalObject = parentArray.getJSONObject(i);
+                                        matchHistoryModel matchHistModel = new matchHistoryModel();
+                                        matchHistModel.setPlatformId(finalObject.getString("platformId"));
+                                        matchHistModel.setGameId(finalObject.getInt("gameId"));
+                                        matchHistModel.setChampion(finalObject.getInt("champion"));
+                                        matchHistModel.setQueue(finalObject.getInt("queue"));
+                                        matchHistModel.setSeason(finalObject.getInt("season"));
+                                        matchHistModel.setRole(finalObject.getString("role"));
+                                        matchHistModel.setLane(finalObject.getString("lane"));
+                                        matchHistModelList.add(matchHistModel);
+                                    }
+
+                                    matchHistoryAdapter adapter = new matchHistoryAdapter(getApplicationContext(),R.layout.match_history_list_row, matchHistModelList);
+                                    lvMatchHist.setAdapter(adapter);
+
+
+                                } catch (final JSONException e) {
+                                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Json parsing error: " + e.getMessage(),
+                                                    Toast.LENGTH_LONG)
+                                                    .show();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                    //execute the second asyncTask
+                    asyncTask2.execute("https://" + server + ".api.riotgames.com/lol/match/v3/matchlists/by-account/" + accountID + "/recent?api_key=" + apiKey);
                 }
             }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<matchHistoryModel> result) {
-            super.onPostExecute(result);
-            matchHistoryAdapter adapter = new matchHistoryAdapter(getApplicationContext(),R.layout.match_history_list_row, result);
-            lvMatchHist.setAdapter(adapter);
-        }
+        });
+        //execute the first asyncTask
+        asyncTask.execute("https://" + server + ".api.riotgames.com/lol/summoner/v3/summoners/by-name/" + summonerName + "?api_key=" + apiKey);
     }
 
     public class matchHistoryAdapter extends ArrayAdapter{
