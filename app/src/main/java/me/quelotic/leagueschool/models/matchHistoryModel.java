@@ -10,6 +10,8 @@ public class matchHistoryModel {
     private int timestamp;
     private String role;
     private String lane;
+    private String championName;
+    private String championTitle;
 
     public String getPlatformId() {
         return platformId;
@@ -73,5 +75,21 @@ public class matchHistoryModel {
 
     public void setLane(String lane) {
         this.lane = lane;
+    }
+
+    public String getChampionName(){
+        return championName;
+    }
+
+    public void setChampionName(String championName) {
+        this.championName = championName;
+    }
+
+    public String getChampionTitle(){
+        return championTitle;
+    }
+
+    public void setChampionTitle(String championTitle) {
+        this.championTitle = championTitle;
     }
 }
