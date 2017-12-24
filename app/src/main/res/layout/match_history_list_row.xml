@@ -55,8 +55,7 @@ android:padding="4dp">
             android:layout_below="@id/championTitle"
             android:fontFamily="@font/advent_pro_light"
             android:textColor="@android:color/black"
-            android:textSize="12sp"
-            android:layout_alignParentBottom="true"/>
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </LinearLayout>
