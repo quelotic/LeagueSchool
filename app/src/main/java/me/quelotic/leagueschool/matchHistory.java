@@ -405,7 +405,7 @@ public class matchHistory extends Activity {
                 case 91: return "Talon";
                 case 40: return "Janna";
                 case 115: return "Ziggs";
-                case 245: return "Ekko";
+                case 245: return "the Boy Who Shattered Time";
                 case 61: return "Orianna";
                 case 114: return "Fiora";
                 case 9: return "Fiddlesticks";
@@ -436,13 +436,13 @@ public class matchHistory extends Activity {
                 case 143: return "Zyra";
                 case 267: return "Nami";
                 case 59: return "Jarvan IV";
-                case 81: return "Ezreal";
+                case 81: return "the Prodigal Explorer";
                 case 164: return "Camille";
                 case 141: return "Kayn";
                 case 516: return "Ornn";
                 case 497: return "Rakan";
                 case 498: return "Xayah";
-                case 142: return "Zoe";
+                case 142: return "the Aspect of Twilight";
             }
             return "";
         }
@@ -450,9 +450,13 @@ public class matchHistory extends Activity {
         private String getQueue(int x) {
             switch (x) {
                 case 1010: return "ARURF Summoner's Rift";
+                case 450: return "ARAM Howling Abyss";
+                case 430: return "Summoner's Rift [Blind pick]";
+                case 920: return "Legend of the Poro King";
             }
             return "";
         }
+
         ImageView championIcon;
         TextView championName, championTitle, queue;
         String strChampionName, strChampionTitle, strQueue;

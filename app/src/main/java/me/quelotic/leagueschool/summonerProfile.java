@@ -42,7 +42,7 @@ public class summonerProfile extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_summoner_profile);
 
-        final String apiKey = "RGAPI-fe3d452c-117d-48c5-8d15-1ffba1b4d9ca";
+        final String apiKey = "RGAPI-dac51fc6-f8ca-4d41-9919-4296fc3b5d03";
         txtSumName = findViewById(R.id.sumName);
         txtSumLevel = findViewById(R.id.sumLevel);
         imgSumIcon = findViewById(R.id.sumIcon);
@@ -74,6 +74,7 @@ public class summonerProfile extends Activity {
         imgFlex5FB = findViewById(R.id.flex5FB);
         imgFlex5VET = findViewById(R.id.flex5VET);
 
+        // opening the bundle that was received from the previous activity
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         final String summonerName = bundle.getString("keySumName");

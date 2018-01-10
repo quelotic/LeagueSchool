@@ -20,7 +20,7 @@ public class main extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        //must be set final cause accessed of within inner class
+        //must be set final cause accessed from within inner class
         final EditText txtSumName = findViewById(R.id.txtSumName);
         final Spinner spinnerServer = findViewById(R.id.spinnerServer);
 
